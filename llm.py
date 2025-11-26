@@ -1,17 +1,12 @@
+# llm.py
+
+from langchain.chat_models import ChatOpenAI
 import os
-import openai
+import langsmith_config  # LangSmith 연동 설정 불러오기
 
-class LLM:
-    def __init__(self, model="gpt-3.5-turbo"):
-        openai.api_key = os.getenv("OPENAI_API_KEY")
-        self.model = model
-
-    def ask(self, prompt):
-        response = openai.ChatCompletion.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": "당신은 전문 영양사입니다. 논리적으로, 안전하게 답변하세요."},
-                {"role": "user", "content": prompt}
-            ]
-        )
-        return response.choices[0].message.content.strip()
+def get_llm():
+    return ChatOpenAI(
+        temperature=0.2,
+        model="gpt-3.5-turbo",  # 필요시 gpt-4로 변경 가능
+        streaming=True
+    )
