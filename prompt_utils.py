@@ -1,12 +1,9 @@
-class PromptBuilder:
-    def __init__(self):
-        pass
+def build_prompt(context, question):
+    return f"""당신은 영양에 대해 잘 아는 AI입니다.
 
-    def build(self, question, docs):
-        context = "\n".join(docs)
-        prompt = f"""당신은 전문 영양사입니다. 아래 문서를 참고하여 질문에 답하세요.
+다음 문서를 참고하여 사용자 질문에 답변하세요:
 
-[참고 문서]
+[문서 내용]
 {context}
 
 [질문]
@@ -14,4 +11,3 @@ class PromptBuilder:
 
 [답변]
 """
-        return prompt
